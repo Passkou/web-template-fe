@@ -4,8 +4,8 @@
   "description": "自用WEB模板（前端）",
   "private": true,
   "scripts": {
-    "debug": "SET NODE_ENV=development&&webpack -w",
-    "build": "SET NODE_ENV=production&&webpack",
+    "debug": "SET NODE_ENV=development&&ts-node tools/webpack.ts",
+    "build": "SET NODE_ENV=production&&ts-node tools/webpack.ts",
     "deploy": "ts-node ./tools/deploy.ts",
     "lint": "eslint .",
     "lint.fix": "eslint . --fix"

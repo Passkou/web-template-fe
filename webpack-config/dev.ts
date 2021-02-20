@@ -12,12 +12,12 @@ const config: webpack.Configuration = {
     mode: 'development',
     output: {
         path: path.resolve(projectConfig.dev.distPath),
-        filename: '[name].dev.js',
+        filename: 'static/[name].dev.js',
         publicPath: projectConfig.dev.publicPath
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].dev.css',
+            filename: 'static/[name].dev.css',
         }) as any,
         ...common.getHtmlWebpackPlugins()
     ]

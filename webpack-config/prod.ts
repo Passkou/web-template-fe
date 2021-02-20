@@ -12,12 +12,12 @@ const config: webpack.Configuration = {
     mode: 'production',
     output: {
         path: path.resolve(projectConfig.prod.distPath),
-        filename: '[name].[chunkhash].js',
+        filename: 'static/[name].[chunkhash].js',
         publicPath: projectConfig.prod.publicPath
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].[chunkhash].css',
+            filename: 'static/[name].[chunkhash].css',
         }) as any,
         ...common.getHtmlWebpackPlugins()
     ]

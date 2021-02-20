@@ -6,7 +6,7 @@ import projectConfig from '../config/project';
 import fs from 'fs';
 import path from 'path';
 
-const publicFiles: string[] = fs.readdirSync(projectConfig.prod.distPath)
+const publicFiles: string[] = fs.readdirSync(path.join('static', projectConfig.prod.distPath))
     .map(f => path.resolve(projectConfig.prod.distPath, f))
     .filter(f => fs.statSync(f).isFile());
 
