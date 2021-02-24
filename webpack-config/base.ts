@@ -6,12 +6,35 @@ import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
+import {getEntry} from './common';
 
+const babelLoader: webpack.RuleSetRule = {
+    loader: 'babel-loader', 
+    options: {
+        presets: [
+            [
+                '@babel/preset-env',
+                {
+                    targets: 'defaults' 
+                }
+            ],
+            [
+                '@babel/preset-react'
+            ],
+            [
+                '@babel/preset-typescript',
+                {
+                    isTSX: true,
+                    allExtensions: true
+                }
+            ]
+        ],
+        plugins: ['react-hot-loader/babel']
+    }
+};
 
 const config: webpack.Configuration = {
-    entry: {
-        index: './src/js/index.tsx'
-    },
+    entry: getEntry(),
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json']
     },
@@ -22,33 +45,11 @@ const config: webpack.Configuration = {
                 test: /\.tsx?$/i,
                 exclude: /[\\/]node_modules[\\/]/,
                 use: [
-                    {
-                        loader: 'babel-loader', 
-                        options: {
-                            presets: [
-                                [
-                                    '@babel/preset-env',
-                                    {
-                                        targets: 'defaults' 
-                                    }
-                                ],
-                                [
-                                    '@babel/preset-react'
-                                ],
-                                [
-                                    '@babel/preset-typescript',
-                                    {
-                                        isTSX: true,
-                                        allExtensions: true
-                                    }
-                                ]
-                            ]
-                        }
-                    }
+                    babelLoader
                 ]
             },
             {
-                test: /\.(jpg|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif|svg)$/i,
                 exclude: /[\\/]node_modules[\\/]/,
                 use: [
                     {

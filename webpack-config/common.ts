@@ -10,7 +10,7 @@ export function getHtmlWebpackPlugins(): HtmlWebpackPlugin[] {
     const htmlWebpackPlugins: HtmlWebpackPlugin[] = [];
     for (const {path: path_, chunks, data} of ejsConfig) {
         htmlWebpackPlugins.push(new HtmlWebpackPlugin({
-            filename: 'html/[name].html',
+            filename: '[name].html',
             template: path_,
             templateParameters: {
                 _projectConfig: projectConfig,
@@ -21,4 +21,16 @@ export function getHtmlWebpackPlugins(): HtmlWebpackPlugin[] {
         }));
     }
     return htmlWebpackPlugins;
+}
+
+export function getEntry(): Record<string, string[]> {
+    const entry: Record<string, string[]> = {};
+    for (const [name, p] of Object.entries(projectConfig.entry)) {
+        entry[name] = ['@babel/polyfill'];
+        if (process.env.NODE_ENV === 'development') {
+            entry[name].push('webpack-hot-middleware/client', 'react-hot-loader/patch');
+        }
+        entry[name].push(p);
+    }
+    return entry;
 }

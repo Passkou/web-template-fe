@@ -14,7 +14,7 @@ const config: EjsConfig[] = [
         path: './src/html/index.ejs',
         chunks: ['index'],
         data: {
-            
+            title: "A Test Website"
         }
     }
 ];

@@ -15,5 +15,9 @@ export default {
     prod: {
         publicPath: '//public.passkou.com',
         distPath: './dist'
+    },
+    // 入口配置
+    entry: {
+        index: './src/js/index.tsx'
     }
 };
