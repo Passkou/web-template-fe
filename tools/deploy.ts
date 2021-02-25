@@ -14,6 +14,10 @@ const htmlFiles: string[] = fs.readdirSync(projectConfig.prod.distPath)
     .map(f => path.resolve(projectConfig.prod.distPath, f))
     .filter(f => f.endsWith('.html'));
 
+const ejsFiles: string[] = fs.readdirSync(projectConfig.prod.distPath)
+.map(f => path.resolve(projectConfig.prod.distPath, f))
+.filter(f => f.endsWith('.ejs'));
+
 const chunksInfoFile: string = path.join(projectConfig.prod.distPath, 'chunks-info.json');
 
 /**
@@ -28,8 +32,17 @@ async function deployPublic(files: string[]): Promise<void> {
 /**
  * 部署 HTML
  */
-async function deployHtml(files: string[]): Promise<void> {
+async function deployHTML(files: string[]): Promise<void> {
     console.log('HTML files----------------------------\n');
+    console.log(files.join('\n'));
+    // 在这写代码...
+}
+
+/**
+ * 部署 EJS 文件
+ */
+async function deployEJS(files: string[]): Promise<void> {
+    console.log('EJS files----------------------------\n');
     console.log(files.join('\n'));
     // 在这写代码...
 }
@@ -42,6 +55,7 @@ async function deployEntry(file: string): Promise<void> {
     // 在这写代码...
 }
 
-deployHtml(htmlFiles);
+deployHTML(htmlFiles);
+deployEJS(ejsFiles);
 deployPublic(publicFiles);
 deployEntry(chunksInfoFile);
