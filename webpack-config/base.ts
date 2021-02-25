@@ -92,6 +92,18 @@ const config: webpack.Configuration = {
                         loader: 'postcss-loader'
                     }
                 ]
+            },
+            {
+                test: /\.ejs$/i,
+                include: /[\\/]src[\\/]view[\\/]/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },
