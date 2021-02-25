@@ -29,7 +29,7 @@ const babelLoader: webpack.RuleSetRule = {
                 }
             ]
         ],
-        plugins: ['react-hot-loader/babel']
+        plugins: ['react-hot-loader/babel', 'istanbul']
     }
 };
 
